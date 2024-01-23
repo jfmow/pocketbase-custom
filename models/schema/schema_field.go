@@ -8,9 +8,9 @@ import (
 
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/go-ozzo/ozzo-validation/v4/is"
-	"github.com/pocketbase/pocketbase/tools/filesystem"
-	"github.com/pocketbase/pocketbase/tools/list"
-	"github.com/pocketbase/pocketbase/tools/types"
+	"github.com/jmow/pocketbase-custom/tools/filesystem"
+	"github.com/jmow/pocketbase-custom/tools/list"
+	"github.com/jmow/pocketbase-custom/tools/types"
 	"github.com/spf13/cast"
 )
 

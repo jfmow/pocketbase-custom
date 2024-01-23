@@ -8,12 +8,12 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/jmow/pocketbase-custom/models/schema"
+	"github.com/jmow/pocketbase-custom/tools/list"
+	"github.com/jmow/pocketbase-custom/tools/security"
+	"github.com/jmow/pocketbase-custom/tools/store"
+	"github.com/jmow/pocketbase-custom/tools/types"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/models/schema"
-	"github.com/pocketbase/pocketbase/tools/list"
-	"github.com/pocketbase/pocketbase/tools/security"
-	"github.com/pocketbase/pocketbase/tools/store"
-	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/spf13/cast"
 	"golang.org/x/crypto/bcrypt"
 )

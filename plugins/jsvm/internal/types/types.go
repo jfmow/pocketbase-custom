@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/plugins/jsvm"
-	"github.com/pocketbase/pocketbase/tools/list"
+	"github.com/jmow/pocketbase-custom/core"
+	"github.com/jmow/pocketbase-custom/plugins/jsvm"
+	"github.com/jmow/pocketbase-custom/tools/list"
 	"github.com/pocketbase/tygoja"
 )
 
@@ -1053,19 +1053,19 @@ func main() {
 
 	gen := tygoja.New(tygoja.Config{
 		Packages: map[string][]string{
-			"github.com/go-ozzo/ozzo-validation/v4":             {"Error"},
-			"github.com/pocketbase/dbx":                         {"*"},
-			"github.com/pocketbase/pocketbase/tools/security":   {"*"},
-			"github.com/pocketbase/pocketbase/tools/filesystem": {"*"},
-			"github.com/pocketbase/pocketbase/tools/template":   {"*"},
-			"github.com/pocketbase/pocketbase/tokens":           {"*"},
-			"github.com/pocketbase/pocketbase/mails":            {"*"},
-			"github.com/pocketbase/pocketbase/apis":             {"*"},
-			"github.com/pocketbase/pocketbase/forms":            {"*"},
-			"github.com/pocketbase/pocketbase":                  {"*"},
-			"path/filepath":                                     {"*"},
-			"os":                                                {"*"},
-			"os/exec":                                           {"Command"},
+			"github.com/go-ozzo/ozzo-validation/v4":              {"Error"},
+			"github.com/pocketbase/dbx":                          {"*"},
+			"github.com/jmow/pocketbase-custom/tools/security":   {"*"},
+			"github.com/jmow/pocketbase-custom/tools/filesystem": {"*"},
+			"github.com/jmow/pocketbase-custom/tools/template":   {"*"},
+			"github.com/jmow/pocketbase-custom/tokens":           {"*"},
+			"github.com/jmow/pocketbase-custom/mails":            {"*"},
+			"github.com/jmow/pocketbase-custom/apis":             {"*"},
+			"github.com/jmow/pocketbase-custom/forms":            {"*"},
+			"github.com/pocketbase/pocketbase":                   {"*"},
+			"path/filepath":                                      {"*"},
+			"os":                                                 {"*"},
+			"os/exec":                                            {"Command"},
 		},
 		FieldNameFormatter: func(s string) string {
 			return mapper.FieldName(nil, reflect.StructField{Name: s})

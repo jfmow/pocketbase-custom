@@ -9,13 +9,13 @@ import (
 	"strings"
 	"time"
 
+	"github.com/jmow/pocketbase-custom/core"
+	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jmow/pocketbase-custom/tokens"
+	"github.com/jmow/pocketbase-custom/tools/list"
+	"github.com/jmow/pocketbase-custom/tools/routine"
+	"github.com/jmow/pocketbase-custom/tools/security"
 	"github.com/labstack/echo/v5"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/models"
-	"github.com/pocketbase/pocketbase/tokens"
-	"github.com/pocketbase/pocketbase/tools/list"
-	"github.com/pocketbase/pocketbase/tools/routine"
-	"github.com/pocketbase/pocketbase/tools/security"
 	"github.com/spf13/cast"
 )
 

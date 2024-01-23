@@ -3,8 +3,8 @@ package apis
 import (
 	"net/http"
 
+	"github.com/jmow/pocketbase-custom/core"
 	"github.com/labstack/echo/v5"
-	"github.com/pocketbase/pocketbase/core"
 )
 
 // bindHealthApi registers the health api endpoint.

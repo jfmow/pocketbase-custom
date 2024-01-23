@@ -5,9 +5,9 @@ import (
 	"fmt"
 
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/daos"
-	"github.com/pocketbase/pocketbase/models"
+	"github.com/jmow/pocketbase-custom/core"
+	"github.com/jmow/pocketbase-custom/daos"
+	"github.com/jmow/pocketbase-custom/models"
 )
 
 // CollectionsImport is a form model to bulk import

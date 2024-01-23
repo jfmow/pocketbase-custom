@@ -12,9 +12,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/jmow/pocketbase-custom/core"
+	"github.com/jmow/pocketbase-custom/tests"
 	"github.com/labstack/echo/v5"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tests"
 )
 
 func TestSettingsList(t *testing.T) {

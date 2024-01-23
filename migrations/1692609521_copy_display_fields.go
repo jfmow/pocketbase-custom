@@ -1,10 +1,10 @@
 package migrations
 
 import (
+	"github.com/jmow/pocketbase-custom/daos"
+	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jmow/pocketbase-custom/models/schema"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/daos"
-	"github.com/pocketbase/pocketbase/models"
-	"github.com/pocketbase/pocketbase/models/schema"
 )
 
 // Copy the now deprecated RelationOptions.DisplayFields values from

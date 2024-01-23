@@ -2,10 +2,10 @@ package forms
 
 import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/daos"
-	"github.com/pocketbase/pocketbase/forms/validators"
-	"github.com/pocketbase/pocketbase/models"
+	"github.com/jmow/pocketbase-custom/core"
+	"github.com/jmow/pocketbase-custom/daos"
+	"github.com/jmow/pocketbase-custom/forms/validators"
+	"github.com/jmow/pocketbase-custom/models"
 )
 
 // RecordPasswordResetConfirm is an auth record password reset confirmation form.

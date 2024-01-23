@@ -5,13 +5,13 @@ import (
 	"path/filepath"
 	"runtime"
 
+	"github.com/jmow/pocketbase-custom/daos"
+	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jmow/pocketbase-custom/models/schema"
+	"github.com/jmow/pocketbase-custom/models/settings"
+	"github.com/jmow/pocketbase-custom/tools/migrate"
+	"github.com/jmow/pocketbase-custom/tools/types"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/daos"
-	"github.com/pocketbase/pocketbase/models"
-	"github.com/pocketbase/pocketbase/models/schema"
-	"github.com/pocketbase/pocketbase/models/settings"
-	"github.com/pocketbase/pocketbase/tools/migrate"
-	"github.com/pocketbase/pocketbase/tools/types"
 )
 
 var AppMigrations migrate.MigrationsList

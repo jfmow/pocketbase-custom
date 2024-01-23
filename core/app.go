@@ -7,14 +7,14 @@ import (
 	"context"
 	"log/slog"
 
+	"github.com/jmow/pocketbase-custom/daos"
+	"github.com/jmow/pocketbase-custom/models/settings"
+	"github.com/jmow/pocketbase-custom/tools/filesystem"
+	"github.com/jmow/pocketbase-custom/tools/hook"
+	"github.com/jmow/pocketbase-custom/tools/mailer"
+	"github.com/jmow/pocketbase-custom/tools/store"
+	"github.com/jmow/pocketbase-custom/tools/subscriptions"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/daos"
-	"github.com/pocketbase/pocketbase/models/settings"
-	"github.com/pocketbase/pocketbase/tools/filesystem"
-	"github.com/pocketbase/pocketbase/tools/hook"
-	"github.com/pocketbase/pocketbase/tools/mailer"
-	"github.com/pocketbase/pocketbase/tools/store"
-	"github.com/pocketbase/pocketbase/tools/subscriptions"
 )
 
 // App defines the main PocketBase app interface.

@@ -4,12 +4,12 @@ import (
 	"os"
 	"time"
 
+	"github.com/jmow/pocketbase-custom/core"
+	"github.com/jmow/pocketbase-custom/daos"
+	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jmow/pocketbase-custom/models/settings"
+	"github.com/jmow/pocketbase-custom/tools/types"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/daos"
-	"github.com/pocketbase/pocketbase/models"
-	"github.com/pocketbase/pocketbase/models/settings"
-	"github.com/pocketbase/pocketbase/tools/types"
 )
 
 // SettingsUpsert is a [settings.Settings] upsert (create/update) form.

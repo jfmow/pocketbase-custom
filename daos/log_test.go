@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jmow/pocketbase-custom/tests"
+	"github.com/jmow/pocketbase-custom/tools/types"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/models"
-	"github.com/pocketbase/pocketbase/tests"
-	"github.com/pocketbase/pocketbase/tools/types"
 )
 
 func TestLogQuery(t *testing.T) {

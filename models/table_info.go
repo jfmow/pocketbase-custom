@@ -1,6 +1,6 @@
 package models
 
-import "github.com/pocketbase/pocketbase/tools/types"
+import "github.com/jmow/pocketbase-custom/tools/types"
 
 type TableInfoRow struct {
 	// the `db:"pk"` tag has special semantic so we cannot rename

@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/jmow/pocketbase-custom/tools/rest"
 	"github.com/labstack/echo/v5"
-	"github.com/pocketbase/pocketbase/tools/rest"
 )
 
 func TestBindBody(t *testing.T) {

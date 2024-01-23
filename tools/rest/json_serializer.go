@@ -11,9 +11,9 @@ import (
 	// Test also encoding/json/v2 once released (see https://github.com/golang/go/discussions/63397)
 	goccy "github.com/goccy/go-json"
 
+	"github.com/jmow/pocketbase-custom/tools/search"
+	"github.com/jmow/pocketbase-custom/tools/tokenizer"
 	"github.com/labstack/echo/v5"
-	"github.com/pocketbase/pocketbase/tools/search"
-	"github.com/pocketbase/pocketbase/tools/tokenizer"
 )
 
 type FieldModifier interface {
@@ -68,8 +68,8 @@ func (s *Serializer) Serialize(c echo.Context, i any, indent string) error {
 //
 // Example:
 //
-// 	data := map[string]any{"a": 1, "b": 2, "c": map[string]any{"c1": 11, "c2": 22}}
-// 	PickFields(data, "a,c.c1") // map[string]any{"a": 1, "c": map[string]any{"c1": 11}}
+//	data := map[string]any{"a": 1, "b": 2, "c": map[string]any{"c1": 11, "c2": 22}}
+//	PickFields(data, "a,c.c1") // map[string]any{"a": 1, "c": map[string]any{"c1": 11}}
 func PickFields(data any, rawFields string) (any, error) {
 	parsedFields, err := parseFields(rawFields)
 	if err != nil {
