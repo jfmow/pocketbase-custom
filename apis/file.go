@@ -70,8 +70,7 @@ func (api *fileApi) fileToken(c echo.Context) error {
 	}
 
 	return api.app.OnFileBeforeTokenRequest().Trigger(event, func(e *core.FileTokenEvent) error {
-		fmt.Println("No model for token")
-		fmt.Println(e)
+
 		if e.Model == nil || e.Token == "" {
 			return NewBadRequestError("Failed to generate file token.", nil)
 		}
@@ -113,29 +112,59 @@ func (api *fileApi) download(c echo.Context) error {
 
 	options, ok := fileField.Options.(*schema.FileOptions)
 	if !ok {
-		return NewBadRequestError("", errors.New("Failed to load file options."))
+		return NewBadRequestError("", errors.New("failed to load file options"))
 	}
 
 	// check whether the request is authorized to view the protected file
-	if options.Protected {
-		token := c.QueryParam("token")
+	//TODO: This allows the user to view files WITHOUT a token, as long as the parent page they file is for is shared
+	if record.Collection().Name == "imgs" || record.Collection().Name == "files" {
+		if errs := api.app.Dao().ExpandRecord(record, []string{"page"}, nil); len(errs) > 0 {
+			return fmt.Errorf("failed to expand: %v", errs)
+		}
+		if !record.ExpandedOne("page").GetBool("shared") {
+			if options.Protected {
+				token := c.QueryParam("token")
 
-		adminOrAuthRecord, _ := api.findAdminOrAuthRecordByFileToken(token)
+				adminOrAuthRecord, _ := api.findAdminOrAuthRecordByFileToken(token)
 
-		// create a copy of the cached request data and adjust it for the current auth model
-		requestInfo := *RequestInfo(c)
-		requestInfo.Admin = nil
-		requestInfo.AuthRecord = nil
-		if adminOrAuthRecord != nil {
-			if admin, _ := adminOrAuthRecord.(*models.Admin); admin != nil {
-				requestInfo.Admin = admin
-			} else if record, _ := adminOrAuthRecord.(*models.Record); record != nil {
-				requestInfo.AuthRecord = record
+				// create a copy of the cached request data and adjust it for the current auth model
+				requestInfo := *RequestInfo(c)
+				requestInfo.Admin = nil
+				requestInfo.AuthRecord = nil
+				if adminOrAuthRecord != nil {
+					if admin, _ := adminOrAuthRecord.(*models.Admin); admin != nil {
+						requestInfo.Admin = admin
+					} else if record, _ := adminOrAuthRecord.(*models.Record); record != nil {
+						requestInfo.AuthRecord = record
+					}
+				}
+
+				if ok, _ := api.app.Dao().CanAccessRecord(record, &requestInfo, record.Collection().ViewRule); !ok {
+					return NewForbiddenError("Insufficient permissions to access the file resource.", nil)
+				}
 			}
 		}
+	} else {
+		if options.Protected {
+			token := c.QueryParam("token")
 
-		if ok, _ := api.app.Dao().CanAccessRecord(record, &requestInfo, record.Collection().ViewRule); !ok {
-			return NewForbiddenError("Insufficient permissions to access the file resource.", nil)
+			adminOrAuthRecord, _ := api.findAdminOrAuthRecordByFileToken(token)
+
+			// create a copy of the cached request data and adjust it for the current auth model
+			requestInfo := *RequestInfo(c)
+			requestInfo.Admin = nil
+			requestInfo.AuthRecord = nil
+			if adminOrAuthRecord != nil {
+				if admin, _ := adminOrAuthRecord.(*models.Admin); admin != nil {
+					requestInfo.Admin = admin
+				} else if record, _ := adminOrAuthRecord.(*models.Record); record != nil {
+					requestInfo.AuthRecord = record
+				}
+			}
+
+			if ok, _ := api.app.Dao().CanAccessRecord(record, &requestInfo, record.Collection().ViewRule); !ok {
+				return NewForbiddenError("Insufficient permissions to access the file resource.", nil)
+			}
 		}
 	}
 
