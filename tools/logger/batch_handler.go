@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"sync"
 
-	"github.com/jmow/pocketbase-custom/tools/types"
+	"github.com/jfmow/pocketbase-custom/tools/types"
 )
 
 var _ slog.Handler = (*BatchHandler)(nil)

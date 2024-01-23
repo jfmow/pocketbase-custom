@@ -3,7 +3,7 @@ package types_test
 import (
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/tools/types"
+	"github.com/jfmow/pocketbase-custom/tools/types"
 )
 
 func TestPointer(t *testing.T) {

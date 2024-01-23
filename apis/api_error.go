@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/jmow/pocketbase-custom/tools/inflector"
+	"github.com/jfmow/pocketbase-custom/tools/inflector"
 )
 
 // ApiError defines the struct for a basic api error response.

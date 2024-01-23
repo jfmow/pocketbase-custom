@@ -11,8 +11,8 @@ import (
 	// Test also encoding/json/v2 once released (see https://github.com/golang/go/discussions/63397)
 	goccy "github.com/goccy/go-json"
 
-	"github.com/jmow/pocketbase-custom/tools/search"
-	"github.com/jmow/pocketbase-custom/tools/tokenizer"
+	"github.com/jfmow/pocketbase-custom/tools/search"
+	"github.com/jfmow/pocketbase-custom/tools/tokenizer"
 	"github.com/labstack/echo/v5"
 )
 

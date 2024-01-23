@@ -3,10 +3,10 @@ package forms
 import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/go-ozzo/ozzo-validation/v4/is"
-	"github.com/jmow/pocketbase-custom/core"
-	"github.com/jmow/pocketbase-custom/mails"
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/models/schema"
+	"github.com/jfmow/pocketbase-custom/core"
+	"github.com/jfmow/pocketbase-custom/mails"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/models/schema"
 )
 
 const (

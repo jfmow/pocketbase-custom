@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/jmow/pocketbase-custom/tools/store"
+	"github.com/jfmow/pocketbase-custom/tools/store"
 	"github.com/spf13/cast"
 )
 

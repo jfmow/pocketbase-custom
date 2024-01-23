@@ -12,8 +12,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/core"
-	"github.com/jmow/pocketbase-custom/tests"
+	"github.com/jfmow/pocketbase-custom/core"
+	"github.com/jfmow/pocketbase-custom/tests"
 	"github.com/labstack/echo/v5"
 )
 

@@ -5,10 +5,10 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/forms"
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/tests"
-	"github.com/jmow/pocketbase-custom/tools/security"
+	"github.com/jfmow/pocketbase-custom/forms"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/tests"
+	"github.com/jfmow/pocketbase-custom/tools/security"
 )
 
 func TestRecordVerificationConfirmValidateAndSubmit(t *testing.T) {

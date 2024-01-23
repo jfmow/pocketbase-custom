@@ -23,11 +23,11 @@ import (
 	"time"
 
 	"github.com/AlecAivazis/survey/v2"
-	"github.com/jmow/pocketbase-custom/core"
-	"github.com/jmow/pocketbase-custom/migrations"
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/tools/inflector"
-	"github.com/jmow/pocketbase-custom/tools/migrate"
+	"github.com/jfmow/pocketbase-custom/core"
+	"github.com/jfmow/pocketbase-custom/migrations"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/tools/inflector"
+	"github.com/jfmow/pocketbase-custom/tools/migrate"
 	"github.com/spf13/cobra"
 )
 

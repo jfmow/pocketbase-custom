@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jmow/pocketbase-custom/tools/list"
+	"github.com/jfmow/pocketbase-custom/tools/list"
 	"github.com/pocketbase/dbx"
 	_ "modernc.org/sqlite"
 )

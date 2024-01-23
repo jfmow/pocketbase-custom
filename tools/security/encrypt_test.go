@@ -3,7 +3,7 @@ package security_test
 import (
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/tools/security"
+	"github.com/jfmow/pocketbase-custom/tools/security"
 )
 
 func TestEncrypt(t *testing.T) {

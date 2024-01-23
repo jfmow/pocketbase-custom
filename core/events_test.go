@@ -3,9 +3,9 @@ package core_test
 import (
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/core"
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/tools/list"
+	"github.com/jfmow/pocketbase-custom/core"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/tools/list"
 )
 
 func TestBaseCollectionEventTags(t *testing.T) {

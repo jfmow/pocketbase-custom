@@ -3,9 +3,9 @@ package migrations
 import (
 	"fmt"
 
-	"github.com/jmow/pocketbase-custom/daos"
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/models/schema"
+	"github.com/jfmow/pocketbase-custom/daos"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/models/schema"
 	"github.com/pocketbase/dbx"
 )
 

@@ -5,12 +5,12 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/jmow/pocketbase-custom/daos"
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/models/schema"
-	"github.com/jmow/pocketbase-custom/models/settings"
-	"github.com/jmow/pocketbase-custom/tools/migrate"
-	"github.com/jmow/pocketbase-custom/tools/types"
+	"github.com/jfmow/pocketbase-custom/daos"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/models/schema"
+	"github.com/jfmow/pocketbase-custom/models/settings"
+	"github.com/jfmow/pocketbase-custom/tools/migrate"
+	"github.com/jfmow/pocketbase-custom/tools/types"
 	"github.com/pocketbase/dbx"
 )
 

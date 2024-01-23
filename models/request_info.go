@@ -3,7 +3,7 @@ package models
 import (
 	"strings"
 
-	"github.com/jmow/pocketbase-custom/models/schema"
+	"github.com/jfmow/pocketbase-custom/models/schema"
 )
 
 // RequestInfo defines a HTTP request data struct, usually used

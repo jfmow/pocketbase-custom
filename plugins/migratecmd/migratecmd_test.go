@@ -7,12 +7,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/daos"
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/models/schema"
-	"github.com/jmow/pocketbase-custom/plugins/migratecmd"
-	"github.com/jmow/pocketbase-custom/tests"
-	"github.com/jmow/pocketbase-custom/tools/types"
+	"github.com/jfmow/pocketbase-custom/daos"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/models/schema"
+	"github.com/jfmow/pocketbase-custom/plugins/migratecmd"
+	"github.com/jfmow/pocketbase-custom/tests"
+	"github.com/jfmow/pocketbase-custom/tools/types"
 )
 
 func TestAutomigrateCollectionCreate(t *testing.T) {
@@ -72,9 +72,9 @@ import (
 	"encoding/json"
 
 	"github.com/pocketbase/dbx"
-	"github.com/jmow/pocketbase-custom/daos"
-	m "github.com/jmow/pocketbase-custom/migrations"
-	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/daos"
+	m "github.com/jfmow/pocketbase-custom/migrations"
+	"github.com/jfmow/pocketbase-custom/models"
 )
 
 func init() {
@@ -249,9 +249,9 @@ import (
 	"encoding/json"
 
 	"github.com/pocketbase/dbx"
-	"github.com/jmow/pocketbase-custom/daos"
-	m "github.com/jmow/pocketbase-custom/migrations"
-	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/daos"
+	m "github.com/jfmow/pocketbase-custom/migrations"
+	"github.com/jfmow/pocketbase-custom/models"
 )
 
 func init() {
@@ -504,10 +504,10 @@ import (
 	"encoding/json"
 
 	"github.com/pocketbase/dbx"
-	"github.com/jmow/pocketbase-custom/daos"
-	m "github.com/jmow/pocketbase-custom/migrations"
-	"github.com/jmow/pocketbase-custom/models/schema"
-	"github.com/jmow/pocketbase-custom/tools/types"
+	"github.com/jfmow/pocketbase-custom/daos"
+	m "github.com/jfmow/pocketbase-custom/migrations"
+	"github.com/jfmow/pocketbase-custom/models/schema"
+	"github.com/jfmow/pocketbase-custom/tools/types"
 )
 
 func init() {

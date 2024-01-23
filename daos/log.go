@@ -3,8 +3,8 @@ package daos
 import (
 	"time"
 
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/tools/types"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/tools/types"
 	"github.com/pocketbase/dbx"
 )
 

@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/apis"
-	"github.com/jmow/pocketbase-custom/tests"
+	"github.com/jfmow/pocketbase-custom/apis"
+	"github.com/jfmow/pocketbase-custom/tests"
 	"github.com/labstack/echo/v5"
 	"github.com/spf13/cast"
 )

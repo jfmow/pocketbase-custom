@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/jmow/pocketbase-custom/tools/list"
+	"github.com/jfmow/pocketbase-custom/tools/list"
 	"github.com/spf13/cast"
 	"golang.org/x/net/html"
 )

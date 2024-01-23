@@ -7,8 +7,8 @@ import (
 	"time"
 
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/jmow/pocketbase-custom/models/schema"
-	"github.com/jmow/pocketbase-custom/tools/types"
+	"github.com/jfmow/pocketbase-custom/models/schema"
+	"github.com/jfmow/pocketbase-custom/tools/types"
 )
 
 func TestBaseModelFieldNames(t *testing.T) {

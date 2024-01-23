@@ -6,12 +6,12 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/jmow/pocketbase-custom/core"
-	"github.com/jmow/pocketbase-custom/forms"
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/tools/filesystem"
-	"github.com/jmow/pocketbase-custom/tools/rest"
-	"github.com/jmow/pocketbase-custom/tools/types"
+	"github.com/jfmow/pocketbase-custom/core"
+	"github.com/jfmow/pocketbase-custom/forms"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/tools/filesystem"
+	"github.com/jfmow/pocketbase-custom/tools/rest"
+	"github.com/jfmow/pocketbase-custom/tools/types"
 	"github.com/labstack/echo/v5"
 	"github.com/spf13/cast"
 )

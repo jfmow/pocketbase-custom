@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/tools/rest"
+	"github.com/jfmow/pocketbase-custom/tools/rest"
 	"github.com/labstack/echo/v5"
 )
 

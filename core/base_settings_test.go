@@ -3,9 +3,9 @@ package core_test
 import (
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/tests"
-	"github.com/jmow/pocketbase-custom/tools/types"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/tests"
+	"github.com/jfmow/pocketbase-custom/tools/types"
 )
 
 func TestBaseAppRefreshSettings(t *testing.T) {

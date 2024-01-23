@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"net/mail"
 
-	"github.com/jmow/pocketbase-custom/core"
-	"github.com/jmow/pocketbase-custom/mails/templates"
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/tokens"
-	"github.com/jmow/pocketbase-custom/tools/mailer"
-	"github.com/jmow/pocketbase-custom/tools/rest"
+	"github.com/jfmow/pocketbase-custom/core"
+	"github.com/jfmow/pocketbase-custom/mails/templates"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/tokens"
+	"github.com/jfmow/pocketbase-custom/tools/mailer"
+	"github.com/jfmow/pocketbase-custom/tools/rest"
 )
 
 // SendAdminPasswordReset sends a password reset request email to the specified admin.

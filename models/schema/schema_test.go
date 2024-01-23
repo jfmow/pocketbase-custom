@@ -3,7 +3,7 @@ package schema_test
 import (
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/models/schema"
+	"github.com/jfmow/pocketbase-custom/models/schema"
 )
 
 func TestNewSchemaAndFields(t *testing.T) {

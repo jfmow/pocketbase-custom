@@ -3,7 +3,7 @@ package search_test
 import (
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/tools/search"
+	"github.com/jfmow/pocketbase-custom/tools/search"
 	"github.com/pocketbase/dbx"
 )
 

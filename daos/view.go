@@ -7,13 +7,13 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/models/schema"
-	"github.com/jmow/pocketbase-custom/tools/inflector"
-	"github.com/jmow/pocketbase-custom/tools/list"
-	"github.com/jmow/pocketbase-custom/tools/security"
-	"github.com/jmow/pocketbase-custom/tools/tokenizer"
-	"github.com/jmow/pocketbase-custom/tools/types"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/models/schema"
+	"github.com/jfmow/pocketbase-custom/tools/inflector"
+	"github.com/jfmow/pocketbase-custom/tools/list"
+	"github.com/jfmow/pocketbase-custom/tools/security"
+	"github.com/jfmow/pocketbase-custom/tools/tokenizer"
+	"github.com/jfmow/pocketbase-custom/tools/types"
 	"github.com/pocketbase/dbx"
 )
 

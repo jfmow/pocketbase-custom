@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/jmow/pocketbase-custom/tools/types"
+	"github.com/jfmow/pocketbase-custom/tools/types"
 )
 
 // note: used primarily for the tests

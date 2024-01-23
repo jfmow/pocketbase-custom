@@ -9,10 +9,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/core"
-	"github.com/jmow/pocketbase-custom/tests"
-	"github.com/jmow/pocketbase-custom/tools/archive"
-	"github.com/jmow/pocketbase-custom/tools/list"
+	"github.com/jfmow/pocketbase-custom/core"
+	"github.com/jfmow/pocketbase-custom/tests"
+	"github.com/jfmow/pocketbase-custom/tools/archive"
+	"github.com/jfmow/pocketbase-custom/tools/list"
 )
 
 func TestCreateBackup(t *testing.T) {

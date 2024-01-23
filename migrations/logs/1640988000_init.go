@@ -1,7 +1,7 @@
 package logs
 
 import (
-	"github.com/jmow/pocketbase-custom/tools/migrate"
+	"github.com/jfmow/pocketbase-custom/tools/migrate"
 	"github.com/pocketbase/dbx"
 )
 

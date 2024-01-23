@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/jmow/pocketbase-custom/tools/list"
+	"github.com/jfmow/pocketbase-custom/tools/list"
 )
 
 // MoveDirContent moves the src dir content, that is not listed in the exclide list,

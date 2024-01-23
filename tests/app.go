@@ -9,8 +9,8 @@ import (
 	"runtime"
 	"sync"
 
-	"github.com/jmow/pocketbase-custom/core"
-	"github.com/jmow/pocketbase-custom/tools/mailer"
+	"github.com/jfmow/pocketbase-custom/core"
+	"github.com/jfmow/pocketbase-custom/tools/mailer"
 )
 
 // TestApp is a wrapper app instance used for testing.

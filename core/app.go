@@ -7,13 +7,13 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/jmow/pocketbase-custom/daos"
-	"github.com/jmow/pocketbase-custom/models/settings"
-	"github.com/jmow/pocketbase-custom/tools/filesystem"
-	"github.com/jmow/pocketbase-custom/tools/hook"
-	"github.com/jmow/pocketbase-custom/tools/mailer"
-	"github.com/jmow/pocketbase-custom/tools/store"
-	"github.com/jmow/pocketbase-custom/tools/subscriptions"
+	"github.com/jfmow/pocketbase-custom/daos"
+	"github.com/jfmow/pocketbase-custom/models/settings"
+	"github.com/jfmow/pocketbase-custom/tools/filesystem"
+	"github.com/jfmow/pocketbase-custom/tools/hook"
+	"github.com/jfmow/pocketbase-custom/tools/mailer"
+	"github.com/jfmow/pocketbase-custom/tools/store"
+	"github.com/jfmow/pocketbase-custom/tools/subscriptions"
 	"github.com/pocketbase/dbx"
 )
 

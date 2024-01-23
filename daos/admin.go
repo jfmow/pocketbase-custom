@@ -3,9 +3,9 @@ package daos
 import (
 	"errors"
 
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/tools/list"
-	"github.com/jmow/pocketbase-custom/tools/security"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/tools/list"
+	"github.com/jfmow/pocketbase-custom/tools/security"
 	"github.com/pocketbase/dbx"
 )
 

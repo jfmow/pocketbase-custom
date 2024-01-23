@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jmow/pocketbase-custom/tools/types"
+	"github.com/jfmow/pocketbase-custom/tools/types"
 )
 
 func TestNowDateTime(t *testing.T) {

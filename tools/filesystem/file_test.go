@@ -10,8 +10,8 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/tests"
-	"github.com/jmow/pocketbase-custom/tools/filesystem"
+	"github.com/jfmow/pocketbase-custom/tests"
+	"github.com/jfmow/pocketbase-custom/tools/filesystem"
 	"github.com/labstack/echo/v5"
 )
 

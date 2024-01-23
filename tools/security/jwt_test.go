@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/jmow/pocketbase-custom/tools/security"
+	"github.com/jfmow/pocketbase-custom/tools/security"
 )
 
 func TestParseUnverifiedJWT(t *testing.T) {

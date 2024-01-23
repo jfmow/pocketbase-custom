@@ -6,8 +6,8 @@ import (
 
 	"github.com/fatih/color"
 	"github.com/go-ozzo/ozzo-validation/v4/is"
-	"github.com/jmow/pocketbase-custom/core"
-	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/core"
+	"github.com/jfmow/pocketbase-custom/models"
 	"github.com/spf13/cobra"
 )
 

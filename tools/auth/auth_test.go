@@ -3,7 +3,7 @@ package auth_test
 import (
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/tools/auth"
+	"github.com/jfmow/pocketbase-custom/tools/auth"
 )
 
 func TestNewProviderByName(t *testing.T) {

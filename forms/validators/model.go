@@ -5,7 +5,7 @@ import (
 	"errors"
 
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/jmow/pocketbase-custom/daos"
+	"github.com/jfmow/pocketbase-custom/daos"
 	"github.com/pocketbase/dbx"
 )
 

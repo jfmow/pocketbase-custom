@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/models"
 )
 
 const (
@@ -340,7 +340,7 @@ func (p *plugin) goBlankTemplate() (string, error) {
 
 import (
 	"github.com/pocketbase/dbx"
-	m "github.com/jmow/pocketbase-custom/migrations"
+	m "github.com/jfmow/pocketbase-custom/migrations"
 )
 
 func init() {
@@ -371,9 +371,9 @@ import (
 	"encoding/json"
 
 	"github.com/pocketbase/dbx"
-	"github.com/jmow/pocketbase-custom/daos"
-	m "github.com/jmow/pocketbase-custom/migrations"
-	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/daos"
+	m "github.com/jfmow/pocketbase-custom/migrations"
+	"github.com/jfmow/pocketbase-custom/models"
 )
 
 func init() {
@@ -410,9 +410,9 @@ import (
 	"encoding/json"
 
 	"github.com/pocketbase/dbx"
-	"github.com/jmow/pocketbase-custom/daos"
-	m "github.com/jmow/pocketbase-custom/migrations"
-	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/daos"
+	m "github.com/jfmow/pocketbase-custom/migrations"
+	"github.com/jfmow/pocketbase-custom/models"
 )
 
 func init() {
@@ -458,9 +458,9 @@ import (
 	"encoding/json"
 
 	"github.com/pocketbase/dbx"
-	"github.com/jmow/pocketbase-custom/daos"
-	m "github.com/jmow/pocketbase-custom/migrations"
-	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/daos"
+	m "github.com/jfmow/pocketbase-custom/migrations"
+	"github.com/jfmow/pocketbase-custom/models"
 )
 
 func init() {
@@ -720,15 +720,15 @@ func (p *plugin) goDiffTemplate(new *models.Collection, old *models.Collection) 
 	}
 
 	imports += "\n\t\"github.com/pocketbase/dbx\""
-	imports += "\n\t\"github.com/jmow/pocketbase-custom/daos\""
-	imports += "\n\tm \"github.com/jmow/pocketbase-custom/migrations\""
+	imports += "\n\t\"github.com/jfmow/pocketbase-custom/daos\""
+	imports += "\n\tm \"github.com/jfmow/pocketbase-custom/migrations\""
 
 	if strings.Contains(combined, "schema.SchemaField{") {
-		imports += "\n\t\"github.com/jmow/pocketbase-custom/models/schema\""
+		imports += "\n\t\"github.com/jfmow/pocketbase-custom/models/schema\""
 	}
 
 	if strings.Contains(combined, "types.Pointer(") {
-		imports += "\n\t\"github.com/jmow/pocketbase-custom/tools/types\""
+		imports += "\n\t\"github.com/jfmow/pocketbase-custom/tools/types\""
 	}
 	// ---
 

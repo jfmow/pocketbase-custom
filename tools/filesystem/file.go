@@ -15,8 +15,8 @@ import (
 	"strings"
 
 	"github.com/gabriel-vasile/mimetype"
-	"github.com/jmow/pocketbase-custom/tools/inflector"
-	"github.com/jmow/pocketbase-custom/tools/security"
+	"github.com/jfmow/pocketbase-custom/tools/inflector"
+	"github.com/jfmow/pocketbase-custom/tools/security"
 )
 
 // FileReader defines an interface for a file resource reader.

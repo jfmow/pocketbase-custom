@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/jmow/pocketbase-custom/tools/inflector"
-	"github.com/jmow/pocketbase-custom/tools/list"
+	"github.com/jfmow/pocketbase-custom/tools/inflector"
+	"github.com/jfmow/pocketbase-custom/tools/list"
 	"github.com/pocketbase/dbx"
 )
 

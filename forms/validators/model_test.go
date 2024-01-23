@@ -3,8 +3,8 @@ package validators_test
 import (
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/forms/validators"
-	"github.com/jmow/pocketbase-custom/tests"
+	"github.com/jfmow/pocketbase-custom/forms/validators"
+	"github.com/jfmow/pocketbase-custom/tests"
 )
 
 func TestUniqueId(t *testing.T) {

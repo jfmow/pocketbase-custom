@@ -13,9 +13,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/jmow/pocketbase-custom/core"
-	"github.com/jmow/pocketbase-custom/tools/rest"
-	"github.com/jmow/pocketbase-custom/ui"
+	"github.com/jfmow/pocketbase-custom/core"
+	"github.com/jfmow/pocketbase-custom/tools/rest"
+	"github.com/jfmow/pocketbase-custom/ui"
 	"github.com/labstack/echo/v5"
 	"github.com/labstack/echo/v5/middleware"
 	"github.com/spf13/cast"

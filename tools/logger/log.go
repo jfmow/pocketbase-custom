@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/jmow/pocketbase-custom/tools/types"
+	"github.com/jfmow/pocketbase-custom/tools/types"
 )
 
 // Log is similar to [slog.Record] bit contains the log attributes as

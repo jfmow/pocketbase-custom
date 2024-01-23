@@ -7,11 +7,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/jmow/pocketbase-custom/apis"
-	"github.com/jmow/pocketbase-custom/core"
-	"github.com/jmow/pocketbase-custom/plugins/ghupdate"
-	"github.com/jmow/pocketbase-custom/plugins/jsvm"
-	"github.com/jmow/pocketbase-custom/plugins/migratecmd"
+	"github.com/jfmow/pocketbase-custom/apis"
+	"github.com/jfmow/pocketbase-custom/core"
+	"github.com/jfmow/pocketbase-custom/plugins/ghupdate"
+	"github.com/jfmow/pocketbase-custom/plugins/jsvm"
+	"github.com/jfmow/pocketbase-custom/plugins/migratecmd"
 	"github.com/pocketbase/pocketbase"
 )
 

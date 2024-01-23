@@ -3,7 +3,7 @@ package rest
 import (
 	"net/http"
 
-	"github.com/jmow/pocketbase-custom/tools/filesystem"
+	"github.com/jfmow/pocketbase-custom/tools/filesystem"
 )
 
 // DefaultMaxMemory defines the default max memory bytes that

@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/models/schema"
-	"github.com/jmow/pocketbase-custom/tools/search"
-	"github.com/jmow/pocketbase-custom/tools/security"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/models/schema"
+	"github.com/jfmow/pocketbase-custom/tools/search"
+	"github.com/jfmow/pocketbase-custom/tools/security"
 	"github.com/pocketbase/dbx"
 	"github.com/spf13/cast"
 )

@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/jmow/pocketbase-custom/apis"
+	"github.com/jfmow/pocketbase-custom/apis"
 )
 
 func TestNewApiErrorWithRawData(t *testing.T) {

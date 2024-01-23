@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/apis"
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/tests"
+	"github.com/jfmow/pocketbase-custom/apis"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/tests"
 	"github.com/labstack/echo/v5"
 )
 

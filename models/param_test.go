@@ -3,7 +3,7 @@ package models_test
 import (
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/models"
 )
 
 func TestParamTableName(t *testing.T) {

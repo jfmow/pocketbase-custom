@@ -3,12 +3,12 @@ package apis
 import (
 	"net/http"
 
-	"github.com/jmow/pocketbase-custom/core"
-	"github.com/jmow/pocketbase-custom/forms"
-	"github.com/jmow/pocketbase-custom/models"
-	"github.com/jmow/pocketbase-custom/tokens"
-	"github.com/jmow/pocketbase-custom/tools/routine"
-	"github.com/jmow/pocketbase-custom/tools/search"
+	"github.com/jfmow/pocketbase-custom/core"
+	"github.com/jfmow/pocketbase-custom/forms"
+	"github.com/jfmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/tokens"
+	"github.com/jfmow/pocketbase-custom/tools/routine"
+	"github.com/jfmow/pocketbase-custom/tools/search"
 	"github.com/labstack/echo/v5"
 )
 

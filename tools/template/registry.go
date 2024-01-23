@@ -28,7 +28,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/jmow/pocketbase-custom/tools/store"
+	"github.com/jfmow/pocketbase-custom/tools/store"
 )
 
 // NewRegistry creates and initializes a new templates registry with

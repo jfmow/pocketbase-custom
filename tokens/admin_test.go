@@ -3,8 +3,8 @@ package tokens_test
 import (
 	"testing"
 
-	"github.com/jmow/pocketbase-custom/tests"
-	"github.com/jmow/pocketbase-custom/tokens"
+	"github.com/jfmow/pocketbase-custom/tests"
+	"github.com/jfmow/pocketbase-custom/tokens"
 )
 
 func TestNewAdminAuthToken(t *testing.T) {

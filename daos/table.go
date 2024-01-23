@@ -3,7 +3,7 @@ package daos
 import (
 	"fmt"
 
-	"github.com/jmow/pocketbase-custom/models"
+	"github.com/jfmow/pocketbase-custom/models"
 	"github.com/pocketbase/dbx"
 )
 

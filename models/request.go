@@ -1,6 +1,6 @@
 package models
 
-import "github.com/jmow/pocketbase-custom/tools/types"
+import "github.com/jfmow/pocketbase-custom/tools/types"
 
 var _ Model = (*Request)(nil)
 
