@@ -70,6 +70,8 @@ func (api *fileApi) fileToken(c echo.Context) error {
 	}
 
 	return api.app.OnFileBeforeTokenRequest().Trigger(event, func(e *core.FileTokenEvent) error {
+		fmt.Println("No model for token")
+		fmt.Println(e)
 		if e.Model == nil || e.Token == "" {
 			return NewBadRequestError("Failed to generate file token.", nil)
 		}
