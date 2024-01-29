@@ -307,11 +307,11 @@ func (m *Record) Set(key string, value any) {
 		} else if m.collection.IsAuth() {
 			// normalize auth fields
 			switch key {
-			case schema.FieldNameEmailVisibility, schema.FieldNameVerified:
+			case schema.FieldNameEmailVisibility, schema.FieldNameVerified, schema.FieldNameEmailAuthJWTEnabled:
 				v = cast.ToBool(value)
 			case schema.FieldNameLastResetSentAt, schema.FieldNameLastVerificationSentAt:
 				v, _ = types.ParseDateTime(value)
-			case schema.FieldNameUsername, schema.FieldNameEmail, schema.FieldNameTokenKey, schema.FieldNamePasswordHash:
+			case schema.FieldNameUsername, schema.FieldNameEmail, schema.FieldNameTokenKey, schema.FieldNamePasswordHash, schema.FieldNameEmailAuthJWT:
 				v = cast.ToString(value)
 			}
 		}
@@ -345,11 +345,11 @@ func (m *Record) Get(key string) any {
 			v = field.PrepareValue(v)
 		} else if m.collection.IsAuth() {
 			switch key {
-			case schema.FieldNameEmailVisibility, schema.FieldNameVerified:
+			case schema.FieldNameEmailVisibility, schema.FieldNameVerified, schema.FieldNameEmailAuthJWTEnabled:
 				v = cast.ToBool(v)
 			case schema.FieldNameLastResetSentAt, schema.FieldNameLastVerificationSentAt:
 				v, _ = types.ParseDateTime(v)
-			case schema.FieldNameUsername, schema.FieldNameEmail, schema.FieldNameTokenKey, schema.FieldNamePasswordHash:
+			case schema.FieldNameUsername, schema.FieldNameEmail, schema.FieldNameTokenKey, schema.FieldNamePasswordHash, schema.FieldNameEmailAuthJWT:
 				v = cast.ToString(v)
 			}
 		}

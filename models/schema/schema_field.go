@@ -46,6 +46,8 @@ const (
 	FieldNamePasswordHash           string = "passwordHash"
 	FieldNameLastResetSentAt        string = "lastResetSentAt"
 	FieldNameLastVerificationSentAt string = "lastVerificationSentAt"
+	FieldNameEmailAuthJWT           string = "emailAuthJwt"
+	FieldNameEmailAuthJWTEnabled    string = "emailAuthJwtEnabled"
 )
 
 // BaseModelFieldNames returns the field names that all models have (id, created, updated).
@@ -77,6 +79,8 @@ func AuthFieldNames() []string {
 		FieldNamePasswordHash,
 		FieldNameLastResetSentAt,
 		FieldNameLastVerificationSentAt,
+		FieldNameEmailAuthJWT,
+		FieldNameEmailAuthJWTEnabled,
 	}
 }
 

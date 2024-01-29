@@ -1,19 +1,32 @@
 package apis
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"log/slog"
 	"net/http"
+	"net/mail"
+	"os"
+	"path/filepath"
 	"sort"
+	"strings"
+	"sync"
+	"time"
+	"unicode"
 
+	"html/template"
+
+	validation "github.com/go-ozzo/ozzo-validation/v4"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/jfmow/pocketbase-custom/core"
 	"github.com/jfmow/pocketbase-custom/daos"
 	"github.com/jfmow/pocketbase-custom/forms"
 	"github.com/jfmow/pocketbase-custom/models"
 	"github.com/jfmow/pocketbase-custom/resolvers"
 	"github.com/jfmow/pocketbase-custom/tools/auth"
+	"github.com/jfmow/pocketbase-custom/tools/mailer"
 	"github.com/jfmow/pocketbase-custom/tools/routine"
 	"github.com/jfmow/pocketbase-custom/tools/search"
 	"github.com/jfmow/pocketbase-custom/tools/security"
@@ -41,6 +54,9 @@ func bindRecordAuthApi(app core.App, rg *echo.Group) {
 	subGroup.POST("/auth-refresh", api.authRefresh, RequireSameContextRecordAuth())
 	subGroup.POST("/auth-with-oauth2", api.authWithOAuth2)
 	subGroup.POST("/auth-with-password", api.authWithPassword)
+	subGroup.POST("/request-email-token", api.requestEmailAuthToken)
+	subGroup.POST("/auth-with-email-token", api.authWithEmailJWT)
+	subGroup.POST("/toggle-email-token", api.toggleEmailAuthJWT)
 	subGroup.POST("/request-password-reset", api.requestPasswordReset)
 	subGroup.POST("/confirm-password-reset", api.confirmPasswordReset)
 	subGroup.POST("/request-verification", api.requestVerification)
@@ -49,6 +65,20 @@ func bindRecordAuthApi(app core.App, rg *echo.Group) {
 	subGroup.POST("/confirm-email-change", api.confirmEmailChange)
 	subGroup.GET("/records/:id/external-auths", api.listExternalAuths, RequireAdminOrOwnerAuth("id"))
 	subGroup.DELETE("/records/:id/external-auths/:provider", api.unlinkExternalAuth, RequireAdminOrOwnerAuth("id"))
+
+	exeDir, _ := os.Getwd()
+	htmlFile, err := os.ReadFile(filepath.Join(exeDir, "/emails", "/emailAuth.html"))
+	if err != nil {
+		panic(err)
+	}
+
+	// Convert the HTML file content to a string
+	htmlString := string(htmlFile)
+	template, err := template.New("emailAuthTemplate").Parse(htmlString)
+	if err != nil {
+		panic(err)
+	}
+	emailTemplate = template
 }
 
 type recordAuthApi struct {
@@ -311,6 +341,255 @@ func (api *recordAuthApi) authWithPassword(c echo.Context) error {
 
 	return submitErr
 }
+
+//-----------
+
+var (
+	mapsMutex           sync.Mutex
+	emailMutexMapLock   sync.Mutex
+	emailMutexMap       = make(map[string]*sync.Mutex)
+	emailLastRequestMap = make(map[string]time.Time)
+	requestInterval     = 5 * time.Minute
+	emailTemplate       *template.Template
+)
+
+func (api *recordAuthApi) requestEmailAuthToken(c echo.Context) error {
+	mapsMutex.Lock()
+	defer mapsMutex.Unlock()
+
+	collection, _ := c.Get(ContextCollectionKey).(*models.Collection)
+	if collection == nil {
+		return NewNotFoundError("Missing collection context.", nil)
+	}
+
+	email := c.FormValue("email")
+	expirationTime := time.Now().UTC().Add(requestInterval)
+
+	//-------------------------------------//
+
+	emailMutexMapLock.Lock()
+	defer emailMutexMapLock.Unlock()
+
+	emailMutex, exists := emailMutexMap[email]
+	if !exists {
+		emailMutex = &sync.Mutex{}
+		emailMutexMap[email] = emailMutex
+	}
+	emailMutex.Lock()
+
+	// Check if another request was made within the last 5 minutes
+	lastRequestTime, exists := emailLastRequestMap[email]
+	if exists && expirationTime.Sub(lastRequestTime) < requestInterval {
+		// Another request was made within the last 5 minutes
+		emailMutex.Unlock()
+		return NewBadRequestError("Only one request allowed every 5 minutes", nil)
+	}
+
+	// Update last request time for the email
+	emailLastRequestMap[email] = expirationTime
+
+	// Unlock the email-specific mutex
+	emailMutex.Unlock()
+
+	//-------------------------------------//
+
+	token := security.RandomString(24)
+
+	AuthRecord, err := api.app.Dao().FindAuthRecordByEmail(collection.Name, email)
+	if AuthRecord == nil || err != nil {
+		return NewBadRequestError("No user found with that email!", nil)
+	}
+
+	if !AuthRecord.GetBool("emailAuthJwtEnabled") {
+		return NewUnauthorizedError("Sign in method not supported", nil)
+	}
+
+	claims := jwt.MapClaims{
+		"token":      token,
+		"email":      email,
+		"collection": collection.Id,
+	}
+
+	jwtToken, err := security.NewJWT(claims, AuthRecord.TokenKey(), 300)
+	if err != nil {
+		return NewBadRequestError("Problem creating a sign in code", nil)
+	}
+
+	AuthRecord.Set("emailAuthJwt", jwtToken)
+
+	if err := api.app.Dao().SaveRecord(AuthRecord); err != nil {
+		return NewBadRequestError("Unable to create token", nil)
+	}
+
+	data := struct {
+		Token    string
+		LinkUrl  string
+		HomePage string
+	}{
+		Token:    token,
+		LinkUrl:  c.FormValue("link") + "/api/auth/sso/link?ssoToken=" + token + "&ssoEmail=" + email,
+		HomePage: c.FormValue("link"),
+	}
+	// Create a buffer to store the filled-in template
+	var modifiedHTMLBuffer bytes.Buffer
+
+	// Apply the dynamic data to the template and write the result to the buffer
+	err = emailTemplate.Execute(&modifiedHTMLBuffer, data)
+	if err != nil {
+		panic(err)
+	}
+
+	// Get the final HTML string with dynamic content
+	modifiedHTML := modifiedHTMLBuffer.String()
+
+	message := &mailer.Message{
+		From: mail.Address{
+			Address: api.app.Settings().Meta.SenderAddress,
+			Name:    api.app.Settings().Meta.SenderName,
+		},
+		To:      []mail.Address{{Address: email}},
+		Subject: "Email Auth Token",
+		HTML:    modifiedHTML,
+		// bcc, cc, attachments and custom headers are also supported...
+	}
+
+	return api.app.NewMailClient().Send(message)
+}
+
+func (api *recordAuthApi) authWithEmailJWT(c echo.Context) error {
+
+	if c.FormValue("create") == "true" {
+		return api.signUpWithEmailJWT(c)
+	}
+
+	collection, _ := c.Get(ContextCollectionKey).(*models.Collection)
+	if collection == nil {
+		return NewNotFoundError("Missing collection context.", nil)
+	}
+
+	email := c.FormValue("email")
+	token := c.FormValue("token")
+
+	AuthRecord, err := api.app.Dao().FindAuthRecordByEmail(collection.Name, email)
+	if AuthRecord == nil || err != nil {
+		return NewBadRequestError("No user found with that email!", nil)
+	}
+
+	if !AuthRecord.GetBool("emailAuthJwtEnabled") {
+		return NewUnauthorizedError("Sign in method not supported", nil)
+	}
+
+	authRecordStoredJWT := AuthRecord.GetString("emailAuthJwt")
+
+	if authRecordStoredJWT == "" || email == "" || token == "" {
+		return NewForbiddenError("Invalid code", nil)
+	}
+
+	storedJwtToken, err := security.ParseJWT(authRecordStoredJWT, AuthRecord.TokenKey())
+	if err != nil {
+		return NewBadRequestError("Problem validating a sign in code", nil)
+	}
+
+	if err := storedJwtToken.Valid(); err != nil {
+		AuthRecord.Set("emailAuthJwt", "")
+		if err := api.app.Dao().SaveRecord(AuthRecord); err != nil {
+			return NewBadRequestError("Unable to create token", nil)
+		}
+		return NewForbiddenError("Code expired", nil)
+	}
+
+	if token != storedJwtToken["token"] || AuthRecord.Email() != storedJwtToken["email"] || AuthRecord.Collection().Id != storedJwtToken["collection"] {
+		NewForbiddenError("Problem validating a sign in code", nil)
+	}
+
+	AuthRecord.Set("emailAuthJwt", "")
+
+	if err := api.app.Dao().SaveRecord(AuthRecord); err != nil {
+		return NewBadRequestError("Unable to create token", nil)
+	}
+
+	return RecordAuthResponse(api.app, c, AuthRecord, nil)
+}
+
+func (api *recordAuthApi) signUpWithEmailJWT(c echo.Context) error {
+	collection, _ := c.Get(ContextCollectionKey).(*models.Collection)
+	if collection == nil {
+		return NewNotFoundError("Missing collection context.", nil)
+	}
+
+	email := c.FormValue("email")
+	username := c.FormValue("username")
+
+	AuthRecord, _ := api.app.Dao().FindAuthRecordByEmail(collection.Name, email)
+	if AuthRecord != nil {
+		return NewBadRequestError("An account with that email already exists", nil)
+	}
+
+	record := models.NewRecord(collection)
+
+	record.Set("email", email)
+	record.Set("username", username)
+	record.Set("emailAuthJwtEnabled", "true")
+	//Sets a password so its not null
+	randomStringPWD := security.RandomString(30)
+	record.Set("password", randomStringPWD)
+	record.Set("passwordConfirm", randomStringPWD)
+
+	if err := api.app.Dao().SaveRecord(record); err != nil {
+		return NewBadRequestError("Unable to create token", nil)
+	}
+
+	return RecordAuthResponse(api.app, c, record, nil)
+}
+
+func (api *recordAuthApi) toggleEmailAuthJWT(c echo.Context) error {
+	authRecord, _ := c.Get(ContextAuthRecordKey).(*models.Record)
+	if authRecord == nil {
+		return NewForbiddenError("Missing required data", nil)
+	}
+
+	if authRecord.GetBool("emailAuthJwtEnabled") {
+		/**
+		Runs if the user has Email Auth enabled
+
+		Because they do, it gets the password provided in the submited data and sets it as there account password
+		Then toggles the flags to reflect the changes only if the passwords match
+		*/
+		newPassword := strings.ReplaceAll(c.FormValue("passwordA"), " ", "")
+		password := PasswordN{Value: newPassword}
+		if err := password.ValidateNPassword(); err != nil {
+			return NewBadRequestError("Password does not meet the required format. 1 letter, 1 number, 1 symbol, minimum 8 characters", nil)
+		}
+		authRecord.Set("emailAuthJwtEnabled", "false")
+		authRecord.SetPassword(newPassword)
+		if authRecord.ValidatePassword(newPassword) {
+			if err := api.app.Dao().SaveRecord(authRecord); err != nil {
+				return NewApiError(500, "Unable to set new password", nil)
+			}
+		} else {
+			return NewApiError(500, "Problem validating new password", nil)
+		}
+	} else {
+		/**
+		Runs if the user doesn't have Email Auth on but is enabling it
+
+		It removes there password and generates a new key for there jwt token to use
+		Then updates the flags to reflect the changes
+		*/
+		authRecord.Set("emailAuthJwtEnabled", "true")
+		api.app.Dao().DB()
+		authRecord.Set("passwordHash", "")
+		authRecord.Set("tokenKey", security.RandomString(24))
+		if err := api.app.Dao().SaveRecord(authRecord); err != nil {
+			return NewApiError(500, "Unable to remove password", nil)
+		}
+
+	}
+
+	return nil
+}
+
+//-----------
 
 func (api *recordAuthApi) requestPasswordReset(c echo.Context) error {
 	collection, _ := c.Get(ContextCollectionKey).(*models.Collection)
@@ -628,6 +907,25 @@ func (api *recordAuthApi) unlinkExternalAuth(c echo.Context) error {
 		return NewNotFoundError("", err)
 	}
 
+	/**
+	This checks to see that the user can login after they remove OAuth, they either have emailAuth or if they don't then they also don't have a password by default so they need to create a new one.
+	*/
+	if !record.GetBool("emailAuthJwtEnabled") {
+		newPassword := c.FormValue("password")
+		if newPassword != "" {
+			record.SetPassword(newPassword)
+			if !record.ValidatePassword(newPassword) {
+				return NewBadRequestError("Problem validating new password", nil)
+			} else {
+				if err := api.app.Dao().SaveRecord(record); err != nil {
+					return err
+				}
+			}
+		} else {
+			return NewBadRequestError("You must set a password before unlinking OAuth provider", nil)
+		}
+	}
+
 	externalAuth, err := api.app.Dao().FindExternalAuthByRecordAndProvider(record, provider)
 	if err != nil {
 		return NewNotFoundError("Missing external auth provider relation.", err)
@@ -689,4 +987,47 @@ func (api *recordAuthApi) oauth2SubscriptionRedirect(c echo.Context) error {
 	client.Send(msg)
 
 	return c.Redirect(http.StatusTemporaryRedirect, "../_/#/auth/oauth2-redirect")
+}
+
+//--------------------------------------------------------------------
+
+type PasswordN struct {
+	Value string
+}
+
+func (p PasswordN) ValidateNPassword() error {
+	return validation.ValidateStruct(&p,
+		validation.Field(&p.Value, validation.Required, validation.Length(8, 0)),
+		validation.Field(&p.Value, validation.By(validatePassword)),
+	)
+}
+
+func validatePassword(value interface{}) error {
+	password, ok := value.(string)
+	if !ok {
+		return validation.NewError("", "invalid type for password")
+	}
+
+	// Check if the password contains at least one letter, one digit, and one special character.
+
+	var (
+		hasLetter, hasDigit, hasSpecialChar bool
+	)
+
+	for _, char := range password {
+		switch {
+		case unicode.IsLetter(char):
+			hasLetter = true
+		case unicode.IsDigit(char):
+			hasDigit = true
+		case unicode.IsPunct(char) || unicode.IsSymbol(char):
+			hasSpecialChar = true
+		}
+	}
+
+	if !(hasLetter && hasDigit && hasSpecialChar) {
+		return validation.NewError("", "password must contain at least 1 letter, 1 digit, and 1 special character")
+	}
+
+	return nil
 }
